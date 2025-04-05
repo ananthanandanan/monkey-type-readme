@@ -2,7 +2,7 @@ name: generate monkeytype readme svg
 
 on:
   schedule:
-    - cron: "*/5 * * * *" # every 5 minutes
+    - cron: "0 */24 * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,16 +19,16 @@ jobs:
 
       - name: Download SVG
         run: |
-          mkdir public
-          curl -o public/monkeytype-readme.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark
-          curl -o public/monkeytype-readme-lb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?lb=true
-          curl -o public/monkeytype-readme-pb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?pb=true
-          curl -o public/monkeytype-readme-lb-pb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?lbpb=true
+          mkdir monkeytype-readme-svg
+          curl -o monkeytype-readme-svg/monkeytype-readme.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark
+          curl -o monkeytype-readme-svg/monkeytype-readme-lb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?lb=true
+          curl -o monkeytype-readme-svg/monkeytype-readme-pb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?pb=true
+          curl -o monkeytype-readme-svg/monkeytype-readme-lb-pb.svg https://monkeytype-readme.com/generate-svg/DE__BLANK__/onedark?lbpb=true
 
       - name: push monkeytype-readme.svg to the monkeytype-readme branch
-        uses: crazy-max/ghaction-github-pages@v2.5.0
+        uses: crazy-max/ghaction-github-pages@v4.0.0
         with:
           target_branch: monkeytype-readme
-          build_dir: public
+          build_dir: monkeytype-readme-svg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
