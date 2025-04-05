@@ -1,6 +1,9 @@
 name: generate monkeytype readme svg
 
 on:
+  push:
+    branches:
+      - monkeytype-readme
   schedule:
     - cron: "0 */24 * * *"
   workflow_dispatch:
